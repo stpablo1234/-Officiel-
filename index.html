@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --white: rgba(255, 255, 255, 0.95);
+            --gray-20: rgba(60, 60, 60, 0.7);
+            --white-10: rgba(255, 255, 255, 0.1);
+            --white-15: rgba(255, 255, 255, 0.15);
+            --black-10: rgba(0, 0, 0, 0.1);
+            --blur-intensity: 10px;
+            --btn-size: 36px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            color: var(--white);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        /* Particles Container */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            filter: blur(1px);
+        }
+
+        /* Background Layers */
+        #video-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -10;
+            filter: blur(8px) brightness(0.7);
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        /* Social Buttons */
+        .social-container {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .social-btn {
+            width: var(--btn-size);
+            height: var(--btn-size);
+            display: grid;
+            place-items: center;
+            color: var(--white);
+            background: var(--white-10);
+            backdrop-filter: blur(var(--blur-intensity));
+            -webkit-backdrop-filter: blur(var(--blur-intensity));
+            border-radius: 50%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.12);
+            background: var(--white-15);
+        }
+
+        /* Profile Container */
+        .profile-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--gray-20);
+            backdrop-filter: blur(var(--blur-intensity));
+            -webkit-backdrop-filter: blur(var(--blur-intensity));
+            border-radius: 20px;
+            padding: 30px;
+            width: min(80%, 500px);
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .profile-pic {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .main-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .sub-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+            opacity: 0.9;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: var(--btn-size);
+            height: var(--btn-size);
+            display: grid;
+            place-items: center;
+            color: var(--white);
+            background: var(--white-10);
+            backdrop-filter: blur(var(--blur-intensity));
+            -webkit-backdrop-filter: blur(var(--blur-intensity));
+            border-radius: 50%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .music-control:hover {
+            transform: scale(1.12);
+            background: var(--white-15);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            :root {
+                --btn-size: 32px;
+            }
+            
+            .social-container, .music-control {
+                top: 20px;
+                left: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .profile-container {
+                padding: 25px;
+                width: min(90%, 400px);
+            }
+            
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .main-text {
+                font-size: 2rem;
+            }
+            
+            .sub-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Video Background -->
+    <video autoplay muted loop id="video-bg">
+        <source src="cristiano ronaldo 4k edit _ popular _ the weeknd.mp4" type="video/mp4">
+    </video>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Social Icons -->
+    <div class="social-container">
+        <a href="https://www.youtube.com/@DeadPablo2TOP" target="_blank" class="social-btn">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://discord.com" target="_blank" class="social-btn">
+            <i class="fab fa-discord"></i>
+        </a>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-container">
+        <img src="RussianCAT.jpg" alt="Profile Picture" class="profile-pic">
+        <h1 class="main-text">Welcome To ST! PABLO Official Web My Dear !</h1>
+        <p class="sub-text">Thats My Official Web For Business Thats My Free Fire ID : 4528771943</p>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-control" id="music-toggle">
+        <i class="fas fa-music"></i>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="cristiano ronaldo 4k edit  popular  the weeknd.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Initialize particles.js
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 60,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#ffffff", "#e0e0e0", "#b0b0b0"] // White to gray colors
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": false
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "repulse": {
+                        "distance": 80,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Music control
+        const musicToggle = document.getElementById('music-toggle');
+        const music = document.getElementById('bg-music');
+        const musicIcon = musicToggle.querySelector('i');
+        
+        music.volume = 0.3;
+        
+        musicToggle.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                musicIcon.classList.replace('fa-volume-mute', 'fa-music');
+            } else {
+                music.pause();
+                musicIcon.classList.replace('fa-music', 'fa-volume-mute');
+            }
+        });
+
+        // Try to autoplay
+        music.play().catch(e => {
+            console.log("Autoplay prevented");
+            musicIcon.classList.replace('fa-music', 'fa-volume-mute');
+        });
+    </script>
+</body>
+</html>
